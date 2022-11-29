@@ -11,7 +11,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:vscode-ts-ext-demo.showMessage"
+    "onCommand:vscode-ts-ext-demo.dromeCommit"
   ],
   "repository": {
     "type": "git",
@@ -23,7 +23,15 @@
     "commands": [
       {
         "command": "vscode-ts-ext-demo.showMessage",
-        "title": "显示调试信息"
+        "title": "Show Message"
+      },
+      {
+        "command": "vscode-ts-ext-demo.testAxios",
+        "title": "Test Axios Request"
+      },
+      {
+        "command": "vscode-ts-ext-demo.dromeCommit",
+        "title": "Drome Commit"
       }
     ],
     "viewsContainers": {
@@ -76,5 +84,8 @@
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0",
     "@vscode/test-electron": "^2.2.0"
+  },
+  "dependencies": {
+    "axios": "^1.2.0"
   }
 }
