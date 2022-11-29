@@ -3,7 +3,7 @@
   "displayName": "vscode-ts-ext-demo",
   "description": "An extension demo",
   "icon": "images/drome_logo.png",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.73.0"
   },
@@ -14,8 +14,8 @@
     "onCommand:vscode-ts-ext-demo.showMessage"
   ],
   "repository": {
-   "type": "git",
-   "url": "https://github.com/zchen54/vscode-ts-ext-demo"
+    "type": "git",
+    "url": "https://github.com/zchen54/vscode-ts-ext-demo"
   },
   "main": "./dist/extension.js",
   "publisher": "zchen54",
