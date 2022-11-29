@@ -2,6 +2,7 @@
   "name": "vscode-ts-ext-demo",
   "displayName": "vscode-ts-ext-demo",
   "description": "An extension demo",
+  "icon": "images/drome_logo.png",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.73.0"
