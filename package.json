@@ -12,6 +12,10 @@
   "activationEvents": [
     "onCommand:vscode-ts-ext-demo.showMessage"
   ],
+  "repository": {
+   "type": "git",
+   "url": "https://github.com/zchen54/vscode-ts-ext-demo"
+  },
   "main": "./dist/extension.js",
   "publisher": "zchen54",
   "contributes": {
