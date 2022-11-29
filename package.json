@@ -17,7 +17,7 @@
    "url": "https://github.com/zchen54/vscode-ts-ext-demo"
   },
   "main": "./dist/extension.js",
-  "publisher": "zchen54",
+  "publisher": "zhuchen",
   "contributes": {
     "commands": [
       {
