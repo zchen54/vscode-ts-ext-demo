@@ -4,7 +4,7 @@ This is the README for extension "vscode-ts-ext-demo".
 
 ## Publisher
 
-zchen54
+zhuchen
 
 ## Features
 
