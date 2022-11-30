@@ -11,7 +11,10 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:extension.dromeCommit"
+    "onView:drome-workflows",
+    "onCommand:extension.showMessage",
+    "onCommand:extension.dromeCommit",
+    "onCommand:extension.showWorkflows"
   ],
   "repository": {
     "type": "git",
@@ -36,29 +39,44 @@
         "title": "Drome Commit",
         "icon": "$(source-control)",
         "category": "Drome"
+      },
+      {
+        "command": "extension.showWorkflows",
+        "title": "Show Workflows",
+        "category": "Drome"
       }
     ],
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "drome-alm",
-          "title": "Drome ALM",
+          "id": "drome-support",
+          "title": "Drome Support",
           "icon": "$(getting-started-beginner)"
         }
       ]
     },
     "views": {
-      "drome-alm": [
+      "drome-support": [
         {
           "id": "drome-workflows",
-          "name": "Workflows"
+          "name": "工作流程",
+          "icon": "$(type-hierarchy)"
+        },
+        {
+          "id": "drome-help",
+          "name": "帮助和反馈",
+          "icon": "$(info)"
         }
       ]
     },
     "viewsWelcome": [
       {
-        "view": "drome-alm",
-        "contents": "In order to use git features, you can open a folder containing a git repository or clone from a URL.\n[Open Folder](command:vscode.openFolder)\n[Clone Repository](command:git.clone)\nTo learn more about how to use git and source control in VS Code [read our docs](https://aka.ms/vscode-scm)."
+        "view": "drome-workflows",
+        "contents": "暂无工作流程，点此[获取工作流程](command:extension.showWorkflows)"
+      },
+      {
+        "view": "drome-help",
+        "contents": "简介：Drome-ALM 插件\n当前版本：v0.1.0\n[$(preview)使用帮助](https://drome.top)\n[$(comment)意见反馈](https://drome.top)\n[$(bug)发现 bug！](https://drome.top)"
       }
     ],
     "menus": {

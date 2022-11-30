@@ -5,6 +5,7 @@ import axios from 'axios'
 import { dromeCommit } from './dromeCommit'
 import { USER_INFO_KEY, ACCESS_TOKEN_KEY } from './request'
 import { checkLogin } from './login'
+import { WorkflowPanel } from './workflow'
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -16,6 +17,10 @@ export async function activate(context: vscode.ExtensionContext) {
   // await checkLogin(context)
 
   let dromeCommitCmd = vscode.commands.registerCommand('extension.dromeCommit', () => dromeCommit(context))
+
+  let dromeWorkflowCmd = vscode.commands.registerCommand('extension.showWorkflows', () => {
+    WorkflowPanel.createOrShow(context.extensionUri)
+  })
 
   // The command has been defined in the package.json file
   // Now provide the implementation of the command with registerCommand
@@ -51,6 +56,7 @@ export async function activate(context: vscode.ExtensionContext) {
   })
 
   context.subscriptions.push(dromeCommitCmd)
+  context.subscriptions.push(dromeWorkflowCmd)
   context.subscriptions.push(disposable)
   context.subscriptions.push(testAxios)
 }
