@@ -1,48 +1,38 @@
 import axios from 'axios'
-import { ExtensionContext, window } from 'vscode'
-import { loginApi, USER_INFO_KEY, ACCESS_TOKEN_KEY } from './request'
+import { ExtensionContext, window, workspace, extensions, commands } from 'vscode'
+import { GitExtension } from './types/git'
+
+// ? 参考 https://github.com/RedJue/git-commit-plugin
+
+//获取是否在git扩展内 Gets whether it is in the git extension
+function getGitExtension(): GitExtension | undefined {
+  const vscodeGit = extensions.getExtension<GitExtension>('vscode.git')
+  const gitExtension = vscodeGit && vscodeGit.exports
+  return gitExtension
+}
 
 export async function dromeCommit(context: ExtensionContext) {
-  const accessToken = context.globalState.get(ACCESS_TOKEN_KEY)
-  if (accessToken) {
-  } else {
-    const username = await window.showInputBox({
-      value: '',
-      placeHolder: '请输入用户名',
-      prompt: '请输入登录 Drome-ALM 的用户名',
-      validateInput: (text) => {
-        // window.showInformationMessage(`Validating: ${text}`)
-        return !text ? '用户名不能为空' : null
-      },
-    })
-    if (username) {
-      const password = await window.showInputBox({
-        value: '',
-        placeHolder: '请输入用户密码',
-        prompt: '请输入登录 Drome-ALM 的用户密码',
-        validateInput: (text) => {
-          // window.showInformationMessage(`Validating: ${text}`)
-          return text.length < 6 ? '密码不能少于6位' : null
-        },
-      })
-      if (password) {
-        console.log(username + '_' + password)
-        loginApi({ username, password }).then(
-          (res: any) => {
-            console.log('登录成功', res)
-            if (res.token && res.user) {
-              context.globalState.update(ACCESS_TOKEN_KEY, res.token)
-              context.globalState.update(USER_INFO_KEY, res.user)
-            }
-          },
-          (err) => {
-            window.showErrorMessage(err)
-            console.error(err)
-          }
-        )
-      }
-    } else {
-      console.log('取消登录')
-    }
+  const gitExtension = getGitExtension()
+  if (!gitExtension?.enabled) {
+    window.showErrorMessage('Git extensions are not currently enabled, please try again after enabled!')
+    return false
   }
+  //获取当前的 git仓库实例 Get git repo instance
+  let repo: any = gitExtension.getAPI(1).repositories[0]
+
+  const quickPick = window.createQuickPick()
+  quickPick.placeholder = '搜索关联的任务项'
+  quickPick.items = []
+  quickPick.onDidChangeSelection((selection) => {
+    if (selection[0]) {
+      quickPick.hide()
+      commands.executeCommand('workbench.view.scm')
+      repo.inputBox.value = 'Drome任务项' + selection[0].label
+    }
+  })
+  quickPick.onDidChangeValue((value) => {
+    quickPick.items = [1, 2, 3].map((item, index) => ({ label: 'option_' + index + '_' + value }))
+  })
+  quickPick.onDidHide(() => quickPick.dispose())
+  quickPick.show()
 }

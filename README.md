@@ -1,6 +1,6 @@
-# vscode-ts-ext-demo README
+# drome-support README
 
-This is the README for extension "vscode-ts-ext-demo".
+This is the README for extension "drome-support".
 
 ## Publisher
 

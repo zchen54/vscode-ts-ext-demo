@@ -4,20 +4,23 @@ import * as vscode from 'vscode'
 import axios from 'axios'
 import { dromeCommit } from './dromeCommit'
 import { USER_INFO_KEY, ACCESS_TOKEN_KEY } from './request'
+import { checkLogin } from './login'
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
   // Use the console to output diagnostic information (console.log) and errors (console.error)
   // This line of code will only be executed once when your extension is activated
-  console.log('Congratulations, your extension "vscode-ts-ext-demo" is now active!')
+  console.log('Congratulations, your extension "drome-support" is now active!')
 
-  let dromeCommitCmd = vscode.commands.registerCommand('vscode-ts-ext-demo.dromeCommit', () => dromeCommit(context))
+  // await checkLogin(context)
+
+  let dromeCommitCmd = vscode.commands.registerCommand('extension.dromeCommit', () => dromeCommit(context))
 
   // The command has been defined in the package.json file
   // Now provide the implementation of the command with registerCommand
   // The commandId parameter must match the command field in package.json
-  let disposable = vscode.commands.registerCommand('vscode-ts-ext-demo.showMessage', () => {
+  let disposable = vscode.commands.registerCommand('extension.showMessage', () => {
     // The code you place here will be executed every time your command is executed
     // Display a message box to the user
     const loginUser: any = context.globalState.get(USER_INFO_KEY)
@@ -29,7 +32,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
   })
 
-  let testAxios = vscode.commands.registerCommand('vscode-ts-ext-demo.testAxios', () => {
+  let testAxios = vscode.commands.registerCommand('extension.testAxios', () => {
     axios
       .post('http://drome.top:8888/base/login', { username: 'admin', password: '1234567890' })
       .then(function (response) {

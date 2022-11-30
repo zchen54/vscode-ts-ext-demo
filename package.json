@@ -1,6 +1,6 @@
 {
-  "name": "vscode-ts-ext-demo",
-  "displayName": "vscode-ts-ext-demo",
+  "name": "drome-support",
+  "displayName": "drome-support",
   "description": "An extension demo",
   "icon": "images/drome_logo.png",
   "version": "0.1.0",
@@ -11,27 +11,31 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:vscode-ts-ext-demo.dromeCommit"
+    "onCommand:extension.dromeCommit"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/zchen54/vscode-ts-ext-demo"
+    "url": "https://github.com/zchen54/drome-support"
   },
   "main": "./dist/extension.js",
   "publisher": "zchen54",
   "contributes": {
     "commands": [
       {
-        "command": "vscode-ts-ext-demo.showMessage",
-        "title": "Show Message"
+        "command": "extension.showMessage",
+        "title": "Show Message",
+        "category": "Drome"
       },
       {
-        "command": "vscode-ts-ext-demo.testAxios",
-        "title": "Test Axios Request"
+        "command": "extension.testAxios",
+        "title": "Test Axios Request",
+        "category": "Drome"
       },
       {
-        "command": "vscode-ts-ext-demo.dromeCommit",
-        "title": "Drome Commit"
+        "command": "extension.dromeCommit",
+        "title": "Drome Commit",
+        "icon": "$(source-control)",
+        "category": "Drome"
       }
     ],
     "viewsContainers": {
@@ -56,7 +60,32 @@
         "view": "drome-alm",
         "contents": "In order to use git features, you can open a folder containing a git repository or clone from a URL.\n[Open Folder](command:vscode.openFolder)\n[Clone Repository](command:git.clone)\nTo learn more about how to use git and source control in VS Code [read our docs](https://aka.ms/vscode-scm)."
       }
-    ]
+    ],
+    "menus": {
+      "scm/title": [
+        {
+          "when": "scmProvider == git",
+          "command": "extension.dromeCommit",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "Drome Support",
+      "properties": {
+        "drome-support.username": {
+          "type": "string",
+          "default": "",
+          "description": "登录 Drome-ALM 的用户名"
+        },
+        "drome-support.userPassword": {
+          "type": "string",
+          "default": "",
+          "description": "登录 Drome-ALM 的用户密码"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
